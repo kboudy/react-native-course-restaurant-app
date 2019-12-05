@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
@@ -15,7 +15,8 @@ function SearchScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    // if the empty element here were a view, it would need to be flex:1 (to not over-fill the screen)
+    <>
       <SearchBar
         term={term}
         onTermChange={setTerm}
@@ -23,10 +24,18 @@ function SearchScreen() {
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <Text>We have found {results.length} results</Text>
-      <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
-      <ResultsList results={filterResultsByPrice('$$')} title="Bit Pricier" />
-      <ResultsList results={filterResultsByPrice('$$$')} title="Big Spender" />
-    </View>
+      <ScrollView>
+        <ResultsList
+          results={filterResultsByPrice('$')}
+          title="Cost Effective"
+        />
+        <ResultsList results={filterResultsByPrice('$$')} title="Bit Pricier" />
+        <ResultsList
+          results={filterResultsByPrice('$$$')}
+          title="Big Spender"
+        />
+      </ScrollView>
+    </>
   );
 }
 
