@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
-function SearchScreen() {
+const SearchScreen = () => {
   const [term, setTerm] = useState('');
   const [searchApi, results, errorMessage] = useResults();
 
@@ -37,7 +37,7 @@ function SearchScreen() {
       </ScrollView>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {}
